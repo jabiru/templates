@@ -1,8 +1,15 @@
 Package: templates
-Title: What the package does (one line)
-Version: 0.1
-Authors@R: "First Last <first.last@example.com> [aut, cre]"
-Description: What the package does (one paragraph)
-Depends: R (>= 3.1.1)
-License: What license is it under?
+Title: Functions for generating formatted code and text with parameter substitution.
+Version: 1.0
+Author: Sergei Izrailev
+Maintainer: Sergei Izrailev <sizrailev@collective.com>
+Description: This package provides functions for formatting text and automatically
+   generating formatted code from parameterized input.
+URL: http://github.com/collectivemedia/tictoc
+Depends:
+    R (>= 2.15),
+    methods,
+    stringr
+License: Apache License (== 2.0) | file LICENSE
+Copyright: Copyright (C) Collective, Inc. | file inst/COPYRIGHTS
 LazyData: true

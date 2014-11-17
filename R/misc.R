@@ -9,52 +9,6 @@
 # Sergei Izrailev, 2011-2012
 #-------------------------------------------------------------------------------
 
-#' \code{qqq} - Quit without a prompt and not saving the workspace.
-#' 
-#' @name tmpl.utils
-#' @title Small utility functions.
-#' @aliases qqq lay2 lay3 lay4 lay6 lay9 tmpl.footnote
-#' @rdname tmpl.utils
-qqq <- function() { quit("no") }
-
-#' \code{lay\{2,3,4,6,9\}} - Graph layouts.
-#' @rdname tmpl.utils
-lay2 <- function() { layout(matrix(1:2, 2, 1, byrow = TRUE)) }
-#' @rdname tmpl.utils
-lay3 <- function() { layout(matrix(1:3, 3, 1, byrow = TRUE)) }
-#' @rdname tmpl.utils
-lay4 <- function() { layout(matrix(1:4, 2, 2, byrow = TRUE)) }
-#' @rdname tmpl.utils
-lay6 <- function() { layout(matrix(1:6, 3, 2, byrow = TRUE)) }
-#' @rdname tmpl.utils
-lay9 <- function() { layout(matrix(1:9, 3, 3, byrow = TRUE)) }
-
-#' \code{hst} - Shortcut for \code{history(Inf)}.  
-#' @rdname tmpl.utils
-hst <- function() history(Inf) 
-
-#------------------------------------------------------------------------------
-
-#' \code{tmpl.footnote} - Draw a footnote.
-#' @usage tmpl.footnote(text = format(Sys.time(), "\%d \%b \%Y"), size = .7, color = grey(.5))
-#' @param text Text to display
-#' @param size Font size
-#' @param color Text color
-#' @rdname tmpl.utils
-tmpl.footnote <- function(text = format(Sys.time(), "%d %b %Y"), size = .7, color = grey(.5))
-{
-   require(grid)
-   pushViewport(viewport())
-   grid.text(label = text ,
-         x = unit(1,"npc") - unit(2, "mm"),
-         y = unit(2, "mm"),
-         just = c("right", "bottom"),
-         gp = gpar(cex = size, col = color))
-   popViewport()
-}
-
-#------------------------------------------------------------------------------
-
 #' Converts x to the given type. 
 #' \itemize{
 #' \item \code{binary} maps to integer
@@ -525,40 +479,6 @@ tmpl.get.option <- function(opt, default = NULL, caller = "")
       return(default)
    }
    return(getOption(opt))
-}
-
-#-------------------------------------------------------------------------------
-
-#' \code{tmpl.source.indir} (Deprecated, use \code{source(file, chdir = TRUE)}.)
-#' Sources R code at path by setting working directory in 
-#' containing directory and sourcing there. Then restores the working directory to the current one.
-#' @param path Full or relative path to the R source file. 
-#' @rdname tmpl.utils
-# Probably not compatible with Windows paths, but at this point we don't care.
-tmpl.source.indir <- function (path) {
-   
-   require(stringr)
-   
-   if (length(path) > 1) warning("tmpl.source.indir: argument is a vector; only first element used.")
-   path <- path[1]
-   
-   # Split path into working directory and file name
-   path <- str_split(path, "/")[[1]]
-   n <- length(path)
-   working.dir <- paste(path[-n], collapse = "/")
-   file.name <- path[n]
-   
-   # Reserve current working directory
-   oldir <- getwd()
-   
-   # Source code remotely
-   setwd(working.dir)
-   source(file.name)
-   
-   # Return working directory
-   setwd(oldir)
-   
-   TRUE
 }
 
 #-------------------------------------------------------------------------------
