@@ -33,7 +33,7 @@
 #' }
 tmpl.cast <- function(x, type)
 {
-   if (is.na(match(trim(tolower(type)), c("integer", "character", "numeric", "double", "binary", "logical", "date", "int64", "literal"))) 
+   if (is.na(match(str_trim(tolower(type)), c("integer", "character", "numeric", "double", "binary", "logical", "date", "int64", "literal"))) 
          || (type == "int64" && !exists("as.int64"))) stop(paste("tmpl.cast: unknown type", type))
    if (type == "integer")     return(as.integer(x))
    if (type == "character")   return(as.character(x))
